@@ -1,6 +1,29 @@
 {
   "name": "@vf/academy-root",
   "version": "1.0.0",
+  "private": "true",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "workspaces": {
+    "packages": [
+      "packages/**/*"
+    ],
+    "nohoist": [
+      "**/react",
+      "**/react-dom"
+    ]
+  },
+  "scripts": {
+    "bootstrap": "yarn && lerna bootstrap",
+    "bootstrap:force": "lerna clean --yes && rm -rf node_modules && yarn bootstrap",
+    "build": "lerna run --stream build",
+    "dev": "yarn lerna run dev --scope=@vf/app"
+  },
+  "volta": {
+    "node": "16.17.0",
+    "yarn": "1.22.19"
+  },
+  "devDependencies": {
+    "lerna": "^5.5.1"
+  }
 }
