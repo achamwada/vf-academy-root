@@ -8,7 +8,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   const { isLoaded, error, instance } = useAssembly({
-    assemblySource: 'packages/vf-assembly/build/release.wasm',
+    assemblySource: 'main.wasm',
     imports: {},
   });
 

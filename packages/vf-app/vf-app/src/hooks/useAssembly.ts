@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, EffectCallback } from 'react';
 import { AsBind } from 'as-bind';
 
 export interface AssemblyError {
@@ -22,6 +22,7 @@ export const useAssembly = ({
 
   useEffect(() => {
     const abortController = new AbortController();
+
     const setAssemblyInstance = async () => {
       try {
         const wasmFile = await fetch(assemblySource, {
@@ -46,14 +47,13 @@ export const useAssembly = ({
           });
         }
       }
-
-      await setAssemblyInstance();
-
-      return function cleanup() {
-        abortController.abort();
-      };
     };
-  }, [assemblySource, imports]);
+    setAssemblyInstance();
+
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, []);
 
   return state;
 };
