@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "assemblyscript": "^0.21.3"
+    "assemblyscript": "^0.12.3"
   },
   "type": "module",
   "exports": {
@@ -14,18 +14,14 @@
     }
   },
   "scripts": {
-    "asbuild:debug": "asc ./node_modules/as-bind/lib/assembly/as-bind.ts assembly/index.ts --target debug",
-    "asbuild:release": "asc ./node_modules/as-bind/lib/assembly/as-bind.ts assembly/index.ts --target release",
-    "asbuild": "asc ./node_modules/as-bind/lib/assembly/as-bind.ts assembly/index.ts -b public/main.wasm --optimize",
-    "build": "npm run asbuild:debug && npm run asbuild:release",
+    "build": "asc ../../node_modules/as-bind/lib/assembly/as-bind.ts assembly/index.ts -b build/main.wasm --optimize",
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc ../../node_modules/as-bind/lib/assembly/as-bind.ts assembly/index.ts --target release",
+    "build:dev": "npm run asbuild:debug && npm run asbuild:release",
     "test": "node tests",
     "start": "npx serve ."
   },
   "dependencies": {
-    "as-bind": "^0.8.2"
-  },
-  "volta": {
-    "node": "16.17.0",
-    "yarn": "1.22.19"
+    "as-bind": "^0.3.4"
   }
 }

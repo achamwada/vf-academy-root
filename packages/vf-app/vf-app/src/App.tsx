@@ -23,7 +23,10 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      {isLoaded && instance.exports.add(5, 7)}
+      {
+        //@ts-ignore
+        isLoaded && instance.exports.add(5, 7)
+      }
       {error && error.message}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
