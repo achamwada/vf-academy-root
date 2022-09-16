@@ -14,10 +14,12 @@
     ]
   },
   "scripts": {
+    "asbuild": "lerna run --stream asbuild",
     "bootstrap": "yarn && lerna bootstrap",
     "bootstrap:force": "lerna clean --yes && rm -rf node_modules && yarn bootstrap",
     "build": "lerna run --stream build",
-    "dev": "yarn lerna run dev --scope=@vf/app"
+    "dev": "yarn lerna run dev --scope=@vf/app",
+    "lerna:version": "yarn lerna version --conventional-commits"
   },
   "volta": {
     "node": "16.17.0",

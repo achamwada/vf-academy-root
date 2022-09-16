@@ -1,9 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import { useAssembly } from './hooks/useAssembly';
+// import assemblySource from '@vf/assembly/build/release.wasm';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  const { isLoaded, error, instance } = useAssembly({
+    assemblySource: 'packages/vf-assembly/build/release.wasm',
+    imports: {},
+  });
 
   return (
     <div className="App">
@@ -16,6 +23,8 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      {isLoaded && instance.exports.add(5, 7)}
+      {error && error.message}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -28,7 +37,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
