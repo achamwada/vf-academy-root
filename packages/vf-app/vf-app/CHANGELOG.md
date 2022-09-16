@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/achamwada/vf-academy-root/compare/@vf/app@0.1.0...@vf/app@0.1.1) (2022-09-16)
+
+**Note:** Version bump only for package @vf/app
+
+
+
+
+
 # 0.1.0 (2022-09-16)
 
 
