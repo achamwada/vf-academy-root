@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import { useAssembly } from './hooks/useAssembly';
-// import assemblySource from '@vf/assembly/build/release.wasm';
 import './App.css';
 
 function App() {
@@ -9,7 +8,6 @@ function App() {
 
   const { isLoaded, error, instance } = useAssembly({
     assemblySource: 'main.wasm',
-    imports: {},
   });
 
   return (

@@ -1,4 +1,4 @@
-import { useState, useEffect, EffectCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { AsBind } from 'as-bind';
 
 export interface AssemblyError {
@@ -12,7 +12,7 @@ export interface AssembyState {
 
 export interface UseAssembly {
   assemblySource: string;
-  imports: Record<string, string>;
+  imports?: WebAssembly.Imports;
 }
 export const useAssembly = ({
   assemblySource,
@@ -53,7 +53,7 @@ export const useAssembly = ({
     return function cleanup() {
       abortController.abort();
     };
-  }, []);
+  }, [assemblySource, imports]);
 
   return state;
 };
