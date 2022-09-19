@@ -14,13 +14,13 @@
     ]
   },
   "scripts": {
-    "asbuild": "lerna run --stream asbuild",
-    "bootstrap": "git clean -xdf && yarn && lerna bootstrap",
-    "bootstrap:force": "lerna clean --yes && rm -rf node_modules && yarn bootstrap",
+    "bootstrap": "lerna clean --yes && git clean -xdf && yarn && lerna bootstra",
     "build": "lerna run --stream build",
+    "build:app": "lerna run --stream build:app",
+    "build:assembly": "lerna run --stream asbuild",
     "dev": "yarn lerna run dev --scope=@vf/app",
     "lerna:version": "yarn lerna version --conventional-commits",
-    "build:app": "lerna run --stream build:app"
+    "postbuild": "cp packages/vf-assembly/build/main.wasm packages/vf-app/vf-app/public"
   },
   "volta": {
     "node": "16.17.0",
