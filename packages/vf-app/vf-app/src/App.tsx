@@ -3,10 +3,11 @@ import reactLogo from './assets/react.svg';
 import { useAssembly } from './hooks/useAssembly';
 import './App.css';
 
+import { Instance } from '@vf/assembly/types';
 function App() {
   const [count, setCount] = useState(0);
 
-  const { isLoaded, error, instance } = useAssembly({
+  const { isLoaded, error, instance } = useAssembly<Instance>({
     assemblySource: 'main.wasm',
   });
 
@@ -21,10 +22,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      {
-        //@ts-ignore
-        isLoaded && instance.exports.add(5, 7)
-      }
+      {isLoaded && instance && instance.exports.add(5, 7)}
       {error && error.message}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>

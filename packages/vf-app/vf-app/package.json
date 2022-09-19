@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vf/assembly": "^1.1.1",
     "as-bind": "^0.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

@@ -4,8 +4,8 @@ import { AsBind } from 'as-bind';
 export interface AssemblyError {
   message: string;
 }
-export interface AssembyState {
-  instance?: unknown;
+export interface AssembyState<Instance> {
+  instance?: Instance;
   isLoaded: boolean;
   error?: Error;
 }
@@ -14,11 +14,13 @@ export interface UseAssembly {
   assemblySource: string;
   imports?: WebAssembly.Imports;
 }
-export const useAssembly = ({
+export const useAssembly = <Instance>({
   assemblySource,
   imports,
-}: UseAssembly): AssembyState => {
-  const [state, setState] = useState<AssembyState>({ isLoaded: false });
+}: UseAssembly): AssembyState<Instance> => {
+  const [state, setState] = useState<AssembyState<Instance>>({
+    isLoaded: false,
+  });
 
   useEffect(() => {
     const abortController = new AbortController();
