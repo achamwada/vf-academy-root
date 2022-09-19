@@ -14,9 +14,13 @@ export interface UseAssembly {
   assemblySource: string;
   imports?: WebAssembly.Imports;
 }
+
+const DEFAULT_OPTIONS = {
+  imports: {},
+};
 export const useAssembly = <Instance>({
   assemblySource,
-  imports,
+  imports = DEFAULT_OPTIONS,
 }: UseAssembly): AssembyState<Instance> => {
   const [state, setState] = useState<AssembyState<Instance>>({
     isLoaded: false,
@@ -55,7 +59,7 @@ export const useAssembly = <Instance>({
     return function cleanup() {
       abortController.abort();
     };
-  }, [assemblySource, imports]);
+  }, [assemblySource]);
 
   return state;
 };

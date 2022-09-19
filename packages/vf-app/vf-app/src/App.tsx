@@ -4,11 +4,23 @@ import { useAssembly } from './hooks/useAssembly';
 import './App.css';
 
 import { Instance } from '@vf/assembly/types';
+
 function App() {
   const [count, setCount] = useState(0);
+  const { format } = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+  const imports: WebAssembly.Imports = {
+    auction: {
+      log: console.log,
+      currencyFormatter: format,
+    },
+  };
 
   const { isLoaded, error, instance } = useAssembly<Instance>({
     assemblySource: 'main.wasm',
+    imports,
   });
 
   return (
@@ -22,7 +34,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      {isLoaded && instance && instance.exports.add(5, 7)}
+      {isLoaded && instance && instance.exports.totalPrice(5, 7)}
       {error && error.message}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
