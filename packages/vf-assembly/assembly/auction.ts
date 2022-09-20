@@ -29,7 +29,7 @@ export function getStampDutyCost(propertyValue: i32): i32 {
   return STAMP_DUTY_RANGE.HIGH;
 }
 
-export function totalPrice(propertyValue: i32, deposit: i32): i32 {
+export function totalPrice(propertyValue: i32, deposit: i32): string {
   const stampDuty = getStampDutyCost(propertyValue);
   const adminCost = AUCTION_ADMIN_PERCENTAGE * propertyValue;
 
@@ -37,8 +37,6 @@ export function totalPrice(propertyValue: i32, deposit: i32): i32 {
     propertyValue + stampDuty + adminCost + INSPECTION_COST + deposit;
 
   log(`total =>  ${total.toString()} ${total}`);
-  const cur = currencyFormatter(total);
-  log(`cur =>  ${cur.toString()} 1 ` + cur);
 
-  return total;
+  return currencyFormatter(total);
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AsBind } from 'as-bind';
+import { instantiate } from 'as-bind';
 
 export interface AssemblyError {
   message: string;
@@ -37,7 +37,7 @@ export const useAssembly = <Instance>({
         if (!wasmFile.ok) {
           throw new Error(`Failed to fetch resource ${assemblySource}.`);
         }
-        const instance = await AsBind.instantiate(wasmFile, imports);
+        const instance = await instantiate(wasmFile, imports);
         if (!abortController.signal.aborted) {
           setState({
             ...state,
