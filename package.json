@@ -14,7 +14,7 @@
     ]
   },
   "scripts": {
-    "bootstrap": "lerna clean --yes && git clean -xdf && yarn && lerna bootstra",
+    "bootstrap": "lerna clean --yes && git clean -xdf && yarn && lerna bootstrap",
     "asbuild": "lerna run --stream asbuild",
     "build": "lerna run --stream build",
     "build:app": "lerna run --stream build:app",
