@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/achamwada/vf-academy-root/compare/@vf/app@0.2.0...@vf/app@0.3.0) (2022-09-21)
+
+
+### Features
+
+* **@vf/app:** updating UI ([9e8c6c0](https://github.com/achamwada/vf-academy-root/commit/9e8c6c08060f8fc8acc8256e72668efea794d6e9))
+
+
+
+
+
 # [0.2.0](https://github.com/achamwada/vf-academy-root/compare/@vf/app@0.1.6...@vf/app@0.2.0) (2022-09-21)
 
 
