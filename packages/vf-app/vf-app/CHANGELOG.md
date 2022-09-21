@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/achamwada/vf-academy-root/compare/@vf/app@0.1.6...@vf/app@0.2.0) (2022-09-21)
+
+
+### Features
+
+* **@vf/assembly:** testing memory usage ([3f3185b](https://github.com/achamwada/vf-academy-root/commit/3f3185b3de4ad28b8488c7151d5ba6510fa2967c))
+
+
+
+
+
 ## [0.1.7](https://github.com/achamwada/vf-academy-root/compare/@vf/app@0.1.6...@vf/app@0.1.7) (2022-09-20)
 
 **Note:** Version bump only for package @vf/app
