@@ -9,8 +9,6 @@ export interface DisplayRendersProps {
   sharedMemoryCalculatedRenders: number;
 }
 
-let num = 0;
-
 const DisplayRenders: FC<DisplayRendersProps> = ({
   readMemoryFromIndex,
   mutableRootNumber,
@@ -18,8 +16,7 @@ const DisplayRenders: FC<DisplayRendersProps> = ({
   sharedMemoryCalculatedRenders,
 }) => {
   const totalRenders = readMemoryFromIndex(MEMORY_LOCATIONS.RENDERS);
-  num++;
-  console.log('runns ', num);
+
   return (
     <Block hasPadding={true}>
       Total number of component renders {totalRenders}

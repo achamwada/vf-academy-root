@@ -82,7 +82,7 @@ const App = () => {
 
   return (
     <AppContainer>
-      {isLoaded ? (
+      {isLoaded || error ? (
         <>
           <Header heading="WebAssembly Demo" />
           {totalPrice && memory && (
