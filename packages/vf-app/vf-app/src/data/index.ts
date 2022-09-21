@@ -9,7 +9,7 @@ export interface Property {
 const properties: Property[] = [
   {
     deposit: 40000,
-    value: 15000,
+    value: 25000,
     description: 'description text here',
     location: 'location here',
     title: 'Property 1',
