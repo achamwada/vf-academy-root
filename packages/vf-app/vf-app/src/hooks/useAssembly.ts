@@ -5,7 +5,7 @@ export interface AssemblyError {
   message: string;
 }
 export interface AssembyState<Instance> {
-  instance?: Instance;
+  instance?: Instance & WebAssembly.Memory;
   isLoaded: boolean;
   error?: Error;
 }

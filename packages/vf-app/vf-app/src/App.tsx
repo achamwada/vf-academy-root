@@ -4,6 +4,7 @@ import { useAssembly } from './hooks/useAssembly';
 import './App.css';
 
 import { Instance } from '@vf/assembly/types';
+import { ASUtil } from '@assemblyscript/loader';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,6 +12,7 @@ function App() {
     style: 'currency',
     currency: 'USD',
   });
+
   const imports: WebAssembly.Imports = {
     auction: {
       log: console.log,
@@ -18,10 +20,12 @@ function App() {
     },
   };
 
-  const { isLoaded, error, instance } = useAssembly<Instance>({
+  const { isLoaded, error, instance } = useAssembly<Instance & ASUtil>({
     assemblySource: 'main.wasm',
     imports,
   });
+
+  const readMemoryFromIndex = instance?.exports.readMemoryFromIndex;
 
   return (
     <div className="App">
@@ -34,7 +38,8 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      {isLoaded && instance && instance.exports.totalPrice(5, 7)}
+      {readMemoryFromIndex && readMemoryFromIndex(0)}
+      {instance && instance.exports.totalPrice(5, 7)}
       {error && error.message}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
