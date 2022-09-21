@@ -2,10 +2,6 @@ declare function log(arg: string): void;
 
 declare function currencyFormatter(value: number): string;
 
-export function add(a: i32, b: i32): i32 {
-  return a + b;
-}
-
 export enum STAMP_DUTY_RANGE {
   FREE = 150000,
   LOW = 200000,
