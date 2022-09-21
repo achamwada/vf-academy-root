@@ -1,5 +1,3 @@
-import 'allocator/tlsf';
-import 'collector/itcm';
 memory.grow(2);
 
 store<u8>(0, 0);
