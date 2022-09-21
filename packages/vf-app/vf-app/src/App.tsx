@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useAssembly } from './hooks/useAssembly';
 
 import { Instance } from '@vf/assembly/types';
 import { ASUtil } from '@assemblyscript/loader';
-import Card from './components/Card';
 import ErrorBlock, { Level } from './components/ErrorBlock';
 import { AppContainer } from './styles';
 import Cards from './components/Cards';
 import properties from './data';
+import DisplayRenders from './components/DisplayRenders';
+import Header from './components/Card/Header';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const { format } = new Intl.NumberFormat('en-US', {
+  const { format } = new Intl.NumberFormat('en-GB', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'GBP',
   });
 
   const imports: WebAssembly.Imports = {
@@ -31,15 +31,20 @@ function App() {
   const readMemoryFromIndex = instance?.exports.readMemoryFromIndex;
   const totalPrice = instance?.exports.totalPrice;
 
+  useEffect(() => {
+    const m = instance;
+  }, []);
+
   return (
     <AppContainer>
-      {readMemoryFromIndex && readMemoryFromIndex(0)}
-      {instance && <Cards properties={properties} totalPrice={totalPrice} />}
+      <Header heading="WebAssembly Demo" />
+      {isLoaded && <Cards properties={properties} totalPrice={totalPrice} />}
       <ErrorBlock
         level={Level.ERROR}
         message={error?.message}
         hasError={!!error}
       />
+      {isLoaded && <DisplayRenders readMemoryFromIndex={readMemoryFromIndex} />}
     </AppContainer>
   );
 }
