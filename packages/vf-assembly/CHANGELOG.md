@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/achamwada/vf-academy-root/compare/@vf/assembly@1.3.4...@vf/assembly@1.4.0) (2022-09-22)
+
+
+### Features
+
+* **@vf/app:** restructuring app to make it simplier ([c94bb60](https://github.com/achamwada/vf-academy-root/commit/c94bb60ca62d307095483561ec25c088713f5c8e))
+
+
+
+
+
 ## [1.3.4](https://github.com/achamwada/vf-academy-root/compare/@vf/assembly@1.3.3...@vf/assembly@1.3.4) (2022-09-21)
 
 **Note:** Version bump only for package @vf/assembly
