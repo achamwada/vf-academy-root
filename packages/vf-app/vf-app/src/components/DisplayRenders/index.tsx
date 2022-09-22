@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { MEMORY_LOCATIONS } from '../../constants';
 import { Block } from '../Card/styles';
 
@@ -6,25 +6,26 @@ export interface DisplayRendersProps {
   readMemoryFromIndex: (index: number) => number;
   refCalculatedRenders: number;
   mutableRootNumber: number;
-  sharedMemoryCalculatedRenders: number;
+  sharedMemoryDataViewValue: number;
 }
 
 const DisplayRenders: FC<DisplayRendersProps> = ({
   readMemoryFromIndex,
   mutableRootNumber,
   refCalculatedRenders,
-  sharedMemoryCalculatedRenders,
+  sharedMemoryDataViewValue,
 }) => {
-  const totalRenders = readMemoryFromIndex(MEMORY_LOCATIONS.RENDERS);
+  const valueStoredInMemory = readMemoryFromIndex(MEMORY_LOCATIONS.RENDERS);
 
   return (
     <Block hasPadding={true}>
-      Total number of component renders {totalRenders}
+      Retrieved from Web Assembly memory {valueStoredInMemory}
       <pre>
         {JSON.stringify({
           refCalculatedRenders,
-          sharedMemoryCalculatedRenders: totalRenders,
+          sharedMemoryCalculatedRenders: valueStoredInMemory,
           mutableRootNumber,
+          sharedMemoryDataViewValue,
         })}
       </pre>
     </Block>

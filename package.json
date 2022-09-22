@@ -21,7 +21,7 @@
     "build:assembly": "lerna run --stream asbuild",
     "dev": "yarn lerna run dev --scope=@vf/app",
     "lerna:version": "yarn lerna version --conventional-commits",
-    "postbuild": "cp packages/vf-assembly/build/main.wasm packages/vf-app/vf-app/public"
+    "postbuild": "cp packages/vf-assembly/build/* packages/vf-app/vf-app/public"
   },
   "volta": {
     "node": "16.17.0",

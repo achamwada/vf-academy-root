@@ -33,6 +33,7 @@ export function totalPrice(propertyValue: i32, deposit: i32): string {
     propertyValue + stampDuty + adminCost + INSPECTION_COST + deposit;
 
   log(`total =>  ${total.toString()} ${total}`);
+  // abort('ERROR IN webassembly');
 
   return currencyFormatter(total);
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAssembly } from './hooks/useAssembly';
 
 import { Instance } from '@vf/assembly/types';
@@ -11,39 +11,17 @@ import DisplayRenders from './components/DisplayRenders';
 import Header from './components/Card/Header';
 import Loader from './components/Loader';
 import { MEMORY_LOCATIONS } from './constants';
+import { imports, getSharedArrayBuffer } from './utils';
 
 interface ExportsForWebAssembly extends ASUtil {
   memory?: WebAssembly.Memory & {
     free: (ptr: number) => void;
   };
 }
-
-const getSharedArrayBuffer = (memory: WebAssembly.Memory): Int8Array => {
-  const sharedArrayBuffer = new Int8Array(memory?.buffer);
-
-  return sharedArrayBuffer;
-};
-
-const { format } = new Intl.NumberFormat('en-GB', {
-  style: 'currency',
-  currency: 'GBP',
-});
-
 let mutableRootNumber = 0;
+let sharedMemoryDataView: DataView;
 
 const App = () => {
-  let { current: refCalculatedRenders } = useRef(0);
-
-  refCalculatedRenders++;
-  mutableRootNumber++;
-
-  const imports: WebAssembly.Imports = {
-    auction: {
-      log: console.log,
-      currencyFormatter: format,
-    },
-  };
-
   const { isLoaded, error, instance } = useAssembly<
     Instance<ExportsForWebAssembly>
   >({
@@ -51,27 +29,47 @@ const App = () => {
     imports,
   });
 
+  const refCalculatedRenders = useRef(0);
+  const [someState, setSomeState] = useState<number>(0);
+
+  console.log('Rendered');
+
   const readMemoryFromIndex = instance?.exports.readMemoryFromIndex;
   const totalPrice = instance?.exports.totalPrice;
 
   const memory = instance?.exports.memory;
-
-  let sharedArrayBuffer: Int8Array, renderingStats;
   if (memory) {
-    sharedArrayBuffer = new Int8Array(memory?.buffer);
-    sharedArrayBuffer[MEMORY_LOCATIONS.RENDERS]++;
-
-    renderingStats = {
-      refCalculatedRenders,
-      mutableRootNumber,
-      sharedMemoryCalculatedRenders:
-        sharedArrayBuffer[MEMORY_LOCATIONS.RENDERS],
-    };
+    sharedMemoryDataView = new DataView(memory.buffer);
   }
+
+  useEffect(() => {
+    const IntervalTimeout = setInterval(() => {
+      setSomeState(someState + 1);
+    }, 10);
+
+    refCalculatedRenders.current += 1;
+    mutableRootNumber += 1;
+
+    if (sharedMemoryDataView) {
+      const latestValueToStore =
+        sharedMemoryDataView.getUint8(MEMORY_LOCATIONS.RENDERS) + 1;
+      sharedMemoryDataView.setUint8(
+        MEMORY_LOCATIONS.RENDERS,
+        latestValueToStore,
+      );
+    }
+
+    return function cleanup(): void {
+      clearInterval(IntervalTimeout);
+    };
+  });
+
   const getRenderingstats = () => ({
-    refCalculatedRenders,
+    refCalculatedRenders: refCalculatedRenders.current,
     mutableRootNumber,
-    sharedMemoryCalculatedRenders: sharedArrayBuffer[MEMORY_LOCATIONS.RENDERS],
+    sharedMemoryDataViewValue: sharedMemoryDataView.getUint8(
+      MEMORY_LOCATIONS.RENDERS,
+    ),
   });
 
   useEffect(() => {
