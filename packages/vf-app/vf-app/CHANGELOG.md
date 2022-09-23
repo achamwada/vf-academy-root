@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/achamwada/vf-academy-root/compare/@vf/app@0.4.0...@vf/app@0.5.0) (2022-09-23)
+
+
+### Features
+
+* **@vf/app:** simplifying app and updating assembly starter kit ([460fac2](https://github.com/achamwada/vf-academy-root/commit/460fac2803b0ad38fd3cbbcd168d7c2ccea00ac9))
+
+
+
+
+
 # [0.4.0](https://github.com/achamwada/vf-academy-root/compare/@vf/app@0.3.5...@vf/app@0.4.0) (2022-09-22)
 
 
