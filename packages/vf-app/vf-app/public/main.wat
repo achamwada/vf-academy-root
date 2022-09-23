@@ -2999,7 +2999,7 @@
   unreachable
  )
  (func $~start
-  i32.const 50
+  i32.const 1
   memory.grow
   drop
   i32.const 0

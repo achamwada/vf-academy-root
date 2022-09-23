@@ -11,7 +11,7 @@ const { format } = new Intl.NumberFormat('en-GB', {
 
 export const imports: WebAssembly.Imports = {
   auction: {
-    log: () => null,
+    log: console.log,
     currencyFormatter: format,
   },
 };

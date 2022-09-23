@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useAssembly } from './hooks/useAssembly';
 
 import { Instance } from '@vf/assembly/types';
-import { ASUtil } from '@assemblyscript/loader';
 import ErrorBlock, { Level } from './components/ErrorBlock';
 import { AppContainer } from './styles';
 import Cards from './components/Cards';
@@ -12,16 +11,13 @@ import Header from './components/Card/Header';
 import Loader from './components/Loader';
 import { MEMORY_LOCATIONS } from './constants';
 import { imports, getSharedArrayBuffer } from './utils';
+import { ExportsForWebAssembly } from './types';
 
-interface ExportsForWebAssembly extends ASUtil {
-  memory?: WebAssembly.Memory & {
-    free: (ptr: number) => void;
-  };
-}
 let mutableRootNumber = 0;
 let sharedMemoryDataView: DataView;
 
 const App = () => {
+  // Instantiating Web Assembly
   const { isLoaded, error, instance } = useAssembly<
     Instance<ExportsForWebAssembly>
   >({
@@ -29,6 +25,7 @@ const App = () => {
     imports,
   });
 
+  // Creating ref to track react renders
   const refCalculatedRenders = useRef(0);
   const [someState, setSomeState] = useState<number>(0);
 
@@ -43,13 +40,16 @@ const App = () => {
   }
 
   useEffect(() => {
+    // Force re-render every sec
     const IntervalTimeout = setInterval(() => {
       setSomeState(someState + 1);
-    }, 10);
+    }, 1000);
 
+    // Incrementing ref to the latest count of renders
     refCalculatedRenders.current += 1;
     mutableRootNumber += 1;
 
+    // Writing to shared memory bits the number of renders
     if (sharedMemoryDataView) {
       const latestValueToStore =
         sharedMemoryDataView.getUint8(MEMORY_LOCATIONS.RENDERS) + 1;
@@ -71,12 +71,6 @@ const App = () => {
       MEMORY_LOCATIONS.RENDERS,
     ),
   });
-
-  useEffect(() => {
-    return () => {
-      memory?.free(getSharedArrayBuffer(memory)[MEMORY_LOCATIONS.RENDERS]);
-    };
-  }, []);
 
   return (
     <AppContainer>

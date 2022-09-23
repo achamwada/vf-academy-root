@@ -1,4 +1,4 @@
-memory.grow(50);
+memory.grow(1);
 
 store<u8>(0, 2);
 

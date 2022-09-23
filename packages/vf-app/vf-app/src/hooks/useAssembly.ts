@@ -1,23 +1,8 @@
 import { useState, useEffect } from 'react';
 import { instantiate } from 'as-bind';
+import { UseAssembly, AssembyState } from '../types';
+import { DEFAULT_OPTIONS } from '../constants';
 
-export interface AssemblyError {
-  message: string;
-}
-export interface AssembyState<Instance> {
-  instance?: Instance & WebAssembly.Memory;
-  isLoaded: boolean;
-  error?: Error;
-}
-
-export interface UseAssembly {
-  assemblySource: string;
-  imports?: WebAssembly.Imports;
-}
-
-const DEFAULT_OPTIONS = {
-  imports: {},
-};
 export const useAssembly = <Instance>({
   assemblySource,
   imports = DEFAULT_OPTIONS,
